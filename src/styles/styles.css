@@ -1,0 +1,28 @@
+.archived-member-profile, .archived-member-mini-profile , .archived-member-post-message, .archived-member-row {
+
+	opacity: 0.5;
+
+}
+
+.archived-member-row, .archived-member-row .user-link {
+
+	font-style: italic;
+
+}
+
+/* Example of positioning an image to the corner */
+
+/*.archived-member-mini-profile {
+
+	position: relative;
+
+}
+
+.archived-member-mini-profile-custom {
+
+	position: absolute;
+	right: -38px;
+	top: 32px;
+	transform: rotate(45deg)
+
+}*/
