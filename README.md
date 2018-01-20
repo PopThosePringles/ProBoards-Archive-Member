@@ -13,6 +13,12 @@ Allows you to add members to a list that will display as archived across the for
  * Add HTML to mini profiles so you can customise it further (i.e. archived image).
  * All can be changed by CSS to tweak it how you want it to look.
  
+ If you have a custom info area, and the total member count is not getting updated, then you can modify your template to wrap an element around the count variable.
+ 
+ Example:
+ 
+ ```<span class="archive-member-total-members">$[total_members]</span>```
+ 
  The custom element for profiles:
  
  ```<div id="archived-member-profile-custom"></div>```

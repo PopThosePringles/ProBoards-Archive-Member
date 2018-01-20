@@ -91,28 +91,45 @@ class Archive_Member {
 	// for on purpose.  So we grab all TD elements and find the
 	// one that just contains a matching text node.
 
+	// If using custom template for this area, look for the element
+	// wrapping around the count.
+	// <span class="archive-member-total-members">$[total_members]</span>
+
 	static calculate_total_members(){
-		let $td = $(".stats td");
+		let $count = $(".archive-member-total-members");
 
-		$td.each((index, elem) => {
-			let $el = $(elem);
+		if($count.length){
+			let total = parseInt($count.text().replace(/\D+/g, ""), 10);
 
-			if($el.text().match(/^Total Members: ([\d\,\.]+)$/)){
-				let txt = $el.text().split(":");
-				let total = parseInt(txt[1].replace(/\D+/g, ""), 10);
+			total -= this.archived.length;
 
-				total -= this.archived.length;
-
-				if(total < 0){
-					total = 0;
-				}
-
-				$el.text(txt[0] + ": " + this.number_format(total));
-
-				return;
+			if(total < 0){
+				total = 0;
 			}
-		});
 
+			$count.text(this.number_format(total));
+		} else {
+			let $td = $(".stats td");
+
+			$td.each((index, elem) => {
+				let $el = $(elem);
+
+				if($el.text().match(/^Total Members: ([\d\,\.]+)$/)){
+					let txt = $el.text().split(":");
+					let total = parseInt(txt[1].replace(/\D+/g, ""), 10);
+
+					total -= this.archived.length;
+
+					if(total < 0){
+						total = 0;
+					}
+
+					$el.text(txt[0] + ": " + this.number_format(total));
+
+					return;
+				}
+			});
+		}
 	}
 
 	static number_format(str = "", delim = ","){
